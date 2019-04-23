@@ -1,4 +1,4 @@
-## SIMPLE Boilerplate for REDUX and REAC-REDUX.
+## SIMPLE Boilerplate for REDUX and REACT-REDUX.
 
 ## NOTES.
 
