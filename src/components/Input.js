@@ -31,11 +31,12 @@ class Input extends Component{
         )
     }
 
-    addMsg=()=>{
+    addMsg=(e)=>{
         let name    = this.state.name
         let msg     = this.state.msg
         console.log(name,msg)
         this.props.newItem(name, msg)
+        e.preventDefault();
     }
 
     
@@ -43,15 +44,15 @@ class Input extends Component{
     render(){
         return(
             
-            <div className = "row">
-                <div className = "col-md-12">
+            <div className = "div">
                     <div className = "alert alert-success b0">Write Message</div>
                     <p>{this.state.name}</p>
-                    <input className = "form-control b0 my-2" placeholder = "Enter Name"    type = "text"   onChange = {this.nameInput}/>
-                    <input className = "form-control b0 my-2" placeholder = "Enter Message" type = "text"   onChange = {this.msgInput}/>
-                    <button className = "btn b0 btn-info" onClick = {this.addMsg}>Enter</button>
-                    <button className = "btn b0 btn-danger ml-2" type = "reset">Clear</button> 
-                </div>
+                    <form>
+                        <input className = "form-control b0 my-2" placeholder = "Enter Name"    type = "text"   onChange = {this.nameInput} required/>
+                        <input className = "form-control b0 my-2" placeholder = "Enter Message" type = "text"   onChange = {this.msgInput} required/>
+                        <button className = "btn b0 btn-info" onClick = {this.addMsg}>Enter</button>
+                        <button className = "btn b0 btn-danger ml-2" type = "reset">Clear</button> 
+                    </form>
             </div>
         )
     }

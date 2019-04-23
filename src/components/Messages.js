@@ -7,35 +7,42 @@ class Messages extends Component {
         this.state = {
             messages: null,
         }
-        this.fetchMessages = this.props.fetchMessages.bind(this)
     }
-
     componentWillMount(){
         this.props.fetchMessages()
-        console.log(this.props.allMessages)
+    }
+    shouldComponentUpdate(nextProps, nextState){
+        console.log('component did update')
+        if(nextProps){
+            return true
+        }else
+        {
+            return false
+        }
     }
 
-
     render(){
-        if(this.props.allMessages.length === 0)
+        const {allMessages} = this.props
+        if(!allMessages)
         {
             return (
                 <div className = "alert b0 alert-danger">
                     <h6>Move along, nothing to see...</h6>
-                    <button className = "btn btn-success b0" onClick = {this.props.fetchMessages}>Fetch</button>
                 </div>
             )
         }else{
         return(
             <div>
-                <div className = "alert alert-info b0">Messages</div>
+                
+                <div className = "alert alert-info b0">Messages {allMessages.length}</div>
                 {
-                     this.props.allMessages.map(msg => (
+                     allMessages.map(msg => (
                         <div key ={msg.name}>
-                            <p>{msg.name}</p>
+                            <p>{msg.name} says <span className = "badge badge-primary b0">{msg.msg}</span></p>
                         </div>
                     ))
                 }
+                <button className = "btn btn-warning b0" onClick={()=>{console.log(allMessages)}}>Fetch</button>
             </div>
         )
             }
