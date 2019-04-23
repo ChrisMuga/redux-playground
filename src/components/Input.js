@@ -9,8 +9,10 @@ class Input extends Component{
             name: null,
             msg: null,
         }
-        this.nameInput = this.nameInput.bind(this)
-        this.msgInput = this.msgInput.bind(this)
+        this.nameInput  =     this.nameInput.bind(this)
+        this.msgInput   =     this.msgInput.bind(this)
+        this.addMsg     =     this.addMsg.bind(this)
+        
     }
     msgInput(val){
         let value = val.target.value
@@ -28,16 +30,26 @@ class Input extends Component{
             }
         )
     }
+
+    addMsg=()=>{
+        let name    = this.state.name
+        let msg     = this.state.msg
+        console.log(name,msg)
+        this.props.newItem(name, msg)
+    }
+
+    
+    
     render(){
         return(
-  
+            
             <div className = "row">
                 <div className = "col-md-12">
                     <div className = "alert alert-success b0">Write Message</div>
                     <p>{this.state.name}</p>
-                    <input className = "form-control b0 my-2" placeholder = "Enter Name" type = "text" onChange = {this.nameInput}/>
-                    <input className = "form-control b0 my-2" placeholder = "Enter Message" type = "text" onChange = {this.msgInput}/>
-                    <button className = "btn b0 btn-info" onClick = {this.props.newItem}>Enter</button>
+                    <input className = "form-control b0 my-2" placeholder = "Enter Name"    type = "text"   onChange = {this.nameInput}/>
+                    <input className = "form-control b0 my-2" placeholder = "Enter Message" type = "text"   onChange = {this.msgInput}/>
+                    <button className = "btn b0 btn-info" onClick = {this.addMsg}>Enter</button>
                     <button className = "btn b0 btn-danger ml-2" type = "reset">Clear</button> 
                 </div>
             </div>
@@ -50,16 +62,20 @@ let mapStateToProps = (state) => {
         allMessages: state.allMessages
     }
 }
+
+
 let mapDispatchToProps = (dispatch) => {
     return {
-        newItem: () => dispatch({
+        newItem: (name,msg) => dispatch({
             type: 'NEW_INPUT',
             payload: {
-                name: 'Andrew',
-                msg:  'Ma-7'
+                name: name,
+                msg: msg
             }
         })
     }
 }
+
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(Input)

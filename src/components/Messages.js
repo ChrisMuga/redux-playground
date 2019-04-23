@@ -15,14 +15,6 @@ class Messages extends Component {
         console.log(this.props.allMessages)
     }
 
-    componentDidUpdate(){
-        console.log('it did')
-    }
-
-    componentWillReceiveProps(nextProps){
-        this.props.allMessages.unshift(nextProps.state)
-    }
-
 
     render(){
         if(this.props.allMessages.length === 0)
